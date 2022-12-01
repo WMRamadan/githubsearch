@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 
@@ -24,6 +25,16 @@ func getEnv(key, fallback string) string {
 		return value
 	}
 	return fallback
+}
+
+func getVersion() string {
+	file, err := os.Open("VERSION")
+	if err != nil {
+		log.Fatal(err)
+	}
+	b, err := ioutil.ReadAll(file)
+	file.Close()
+	return string(b)
 }
 
 func getUsers(location string) []byte {
@@ -76,6 +87,7 @@ func main() {
 	flag.Parse()
 	app := fiber.New(fiber.Config{
 		Prefork: *prod, // go run app.go -prod
+		AppName: "Github Search v" + getVersion(),
 	})
 	app.Use(recover.New())
 	app.Use(logger.New())
@@ -90,7 +102,7 @@ func main() {
 	v1 := api.Group("/v1")
 
 	v1.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Welcome to Github Search")
+		return c.SendString("Welcome to Github Search v" + getVersion())
 	})
 
 	v1.Get("/users", func(c *fiber.Ctx) error {
