@@ -4,8 +4,14 @@ API for Github Search
 
 # Setup
 
+Run in developer mode
 ```
 go run main.go
+```
+
+Run in production mode
+```
+go run main.go -prod
 ```
 
 # API

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -8,9 +9,15 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 )
 
-var bearer string
+var (
+	bearer string
+	port   = flag.String("port", ":3000", "Port to listen on")
+	prod   = flag.Bool("prod", false, "Enable prefork in Production")
+)
 
 func getEnv(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
@@ -66,7 +73,12 @@ func getRepos(language string) []byte {
 }
 
 func main() {
-	app := fiber.New()
+	flag.Parse()
+	app := fiber.New(fiber.Config{
+		Prefork: *prod, // go run app.go -prod
+	})
+	app.Use(recover.New())
+	app.Use(logger.New())
 	app.Use(cors.New(cors.Config{
 		AllowMethods:  "GET",
 		ExposeHeaders: "Content-Type,Authorization,Accept",
