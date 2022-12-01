@@ -18,15 +18,15 @@ go run main.go -prod
 
 get all users
 ```
-localhost:3000/api/v1/users/
+curl -X GET http://localhost:3000/api/v1/users/
 ```
 
 get all users by location
 ```
-localhost:3000/api/v1/users/location:<location>
+curl -X GET http://localhost:3000/api/v1/users/location:<location>
 ```
 
 get repositories by language
 ```
-localhost:3000/api/v1/repos/<language>
+curl -X GET http://localhost:3000/api/v1/repos/<language>
 ```
