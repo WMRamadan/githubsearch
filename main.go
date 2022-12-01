@@ -78,7 +78,7 @@ func main() {
 	v1 := api.Group("/v1")
 
 	v1.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Welcome to Github Stars")
+		return c.SendString("Welcome to Github Search")
 	})
 
 	v1.Get("/users", func(c *fiber.Ctx) error {
