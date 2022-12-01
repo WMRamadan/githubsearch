@@ -42,6 +42,29 @@ func getUsers(location string) []byte {
 	return body
 }
 
+func getRepos(language string) []byte {
+	URL := "https://api.github.com/search/repositories?q=language:" + language
+
+	req, req_err := http.NewRequest("GET", URL, nil)
+
+	if req_err != nil {
+		fmt.Println(req_err)
+	}
+	req.Header.Add("Accept", "application/vnd.github+json")
+	req.Header.Add("Authorization", bearer)
+
+	client := &http.Client{}
+	resp, client_err := client.Do(req)
+	if client_err != nil {
+		fmt.Println(client_err)
+	}
+	defer resp.Body.Close()
+
+	body, _ := ioutil.ReadAll(resp.Body)
+
+	return body
+}
+
 func main() {
 	app := fiber.New()
 	app.Use(cors.New(cors.Config{
@@ -66,6 +89,11 @@ func main() {
 	v1.Get("/users/location::location?", func(c *fiber.Ctx) error {
 		c.Set("Content-type", "application/json; charset=utf-8")
 		return c.Send(getUsers(c.Params("location")))
+	})
+
+	v1.Get("/repos/:language", func(c *fiber.Ctx) error {
+		c.Set("Content-type", "application/json; charset=utf-8")
+		return c.Send(getRepos(c.Params("language")))
 	})
 
 	app.Listen(":3000")
