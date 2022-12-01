@@ -1,4 +1,5 @@
-# githubstars
+# githubsearch
+
 API for Github Search
 
 # Setup
