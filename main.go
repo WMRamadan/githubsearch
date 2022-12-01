@@ -2,10 +2,9 @@ package main
 
 import (
 	"flag"
-	"fmt"
+	"githubsearch/handlers"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -37,52 +36,6 @@ func getVersion() string {
 	return string(b)
 }
 
-func getUsers(location string) []byte {
-	URL := "https://api.github.com/search/users?q=location:" + location
-
-	req, req_err := http.NewRequest("GET", URL, nil)
-
-	if req_err != nil {
-		fmt.Println(req_err)
-	}
-	req.Header.Add("Accept", "application/vnd.github+json")
-	req.Header.Add("Authorization", bearer)
-
-	client := &http.Client{}
-	resp, client_err := client.Do(req)
-	if client_err != nil {
-		fmt.Println(client_err)
-	}
-	defer resp.Body.Close()
-
-	body, _ := ioutil.ReadAll(resp.Body)
-
-	return body
-}
-
-func getRepos(language string) []byte {
-	URL := "https://api.github.com/search/repositories?q=language:" + language
-
-	req, req_err := http.NewRequest("GET", URL, nil)
-
-	if req_err != nil {
-		fmt.Println(req_err)
-	}
-	req.Header.Add("Accept", "application/vnd.github+json")
-	req.Header.Add("Authorization", bearer)
-
-	client := &http.Client{}
-	resp, client_err := client.Do(req)
-	if client_err != nil {
-		fmt.Println(client_err)
-	}
-	defer resp.Body.Close()
-
-	body, _ := ioutil.ReadAll(resp.Body)
-
-	return body
-}
-
 func main() {
 	flag.Parse()
 	app := fiber.New(fiber.Config{
@@ -107,17 +60,17 @@ func main() {
 
 	v1.Get("/users", func(c *fiber.Ctx) error {
 		c.Set("Content-type", "application/json; charset=utf-8")
-		return c.Send(getUsers(""))
+		return c.Send(handlers.GetUsers("", bearer))
 	})
 
 	v1.Get("/users/location::location?", func(c *fiber.Ctx) error {
 		c.Set("Content-type", "application/json; charset=utf-8")
-		return c.Send(getUsers(c.Params("location")))
+		return c.Send(handlers.GetUsers(c.Params("location"), bearer))
 	})
 
 	v1.Get("/repos/:language", func(c *fiber.Ctx) error {
 		c.Set("Content-type", "application/json; charset=utf-8")
-		return c.Send(getRepos(c.Params("language")))
+		return c.Send(handlers.GetRepos(c.Params("language"), bearer))
 	})
 
 	app.Listen(":3000")
