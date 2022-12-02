@@ -51,6 +51,7 @@ func TestGetRepos(t *testing.T) {
 func TestGetCommits(t *testing.T) {
 	type args struct {
 		user   string
+		date   string
 		bearer string
 	}
 	tests := []struct {
@@ -62,7 +63,7 @@ func TestGetCommits(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := GetCommits(tt.args.user, tt.args.bearer); !reflect.DeepEqual(got, tt.want) {
+			if got := GetCommits(tt.args.user, tt.args.date, tt.args.bearer); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("GetCommits() = %v, want %v", got, tt.want)
 			}
 		})

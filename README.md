@@ -48,7 +48,7 @@ get repositories by user & language
 curl -X GET http://localhost:3000/api/v1/repos/<username>/<language>
 ```
 
-get total commits made by user
+get commits made by user after specific date <YYYY-MM-DD>
 ```
-curl -X GET http://localhost:3000/api/v1/commits/<username>
+curl -X GET http://localhost:3000/api/v1/commits/<username>/<date>
 ```

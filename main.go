@@ -73,9 +73,9 @@ func main() {
 		return c.Send(handlers.GetRepos(c.Params("user"), c.Params("language"), bearer))
 	})
 
-	v1.Get("/commits/:user", func(c *fiber.Ctx) error {
+	v1.Get("/commits/:user/:date", func(c *fiber.Ctx) error {
 		c.Set("Content-type", "application/json; charset=utf-8")
-		return c.Send(handlers.GetCommits(c.Params("user"), bearer))
+		return c.Send(handlers.GetCommits(c.Params("user"), c.Params("date"), bearer))
 	})
 
 	app.Listen(":3000")
