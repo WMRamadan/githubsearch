@@ -30,7 +30,7 @@ func GetUsers(location string, bearer string) []byte {
 }
 
 func GetRepos(user string, language string, bearer string) []byte {
-	URL := "https://api.github.com/search/repositories?q=user:" + user + "&language:" + language
+	URL := "https://api.github.com/search/repositories?q=user:" + user + "+language:" + language
 
 	req, req_err := http.NewRequest("GET", URL, nil)
 
