@@ -2,14 +2,19 @@
 
 API for Github Search
 
-# Config
+# Config/Setup
 
 Export the `ACCESS_TOKEN` environment variable with your github access token
 ```
 export ACCESS_TOKEN=<github_acess_token>
 ```
 
-# Setup
+# Run Tests
+```
+go test -v ./...
+```
+
+# Run App
 
 Run in developer mode
 ```
