@@ -38,6 +38,11 @@ get all users by location
 curl -X GET http://localhost:3000/api/v1/users/location:<location>
 ```
 
+get repositories by user
+```
+curl -X GET http://localhost:3000/api/v1/repos/<username>
+```
+
 get repositories by user & language
 ```
 curl -X GET http://localhost:3000/api/v1/repos/<username>/<language>

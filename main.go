@@ -68,7 +68,7 @@ func main() {
 		return c.Send(handlers.GetUsers(c.Params("location"), bearer))
 	})
 
-	v1.Get("/repos/:user/:language", func(c *fiber.Ctx) error {
+	v1.Get("/repos/:user/:language?", func(c *fiber.Ctx) error {
 		c.Set("Content-type", "application/json; charset=utf-8")
 		return c.Send(handlers.GetRepos(c.Params("user"), c.Params("language"), bearer))
 	})
