@@ -28,6 +28,7 @@ func TestGetUsers(t *testing.T) {
 
 func TestGetRepos(t *testing.T) {
 	type args struct {
+		user     string
 		language string
 		bearer   string
 	}
@@ -40,7 +41,7 @@ func TestGetRepos(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := GetRepos(tt.args.language, tt.args.bearer); !reflect.DeepEqual(got, tt.want) {
+			if got := GetRepos(tt.args.user, tt.args.language, tt.args.bearer); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("GetRepos() = %v, want %v", got, tt.want)
 			}
 		})
