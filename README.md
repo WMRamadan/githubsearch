@@ -47,3 +47,8 @@ get repositories by user & language
 ```
 curl -X GET http://localhost:3000/api/v1/repos/<username>/<language>
 ```
+
+get total commits made by user
+```
+curl -X GET http://localhost:3000/api/v1/commits/<username>
+```
