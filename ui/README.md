@@ -25,5 +25,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 To run tests make sure the dev server is running and run the following from the `ui` directory:
 
 ```bash
-cypress run
+yarn cypress:headless
 ```
