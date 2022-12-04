@@ -28,11 +28,18 @@ export default function Home() {
         <p className={styles.description}>
           API v{data}
         </p>
-        <button type="button" className={styles.button}>
-          <Link href="/users" passHref>
-            Users
-          </Link>
-        </button>
+        <div>
+          <button type="button" className={styles.button}>
+            <Link href="/users" passHref>
+              Users
+            </Link>
+          </button>
+          <button type="button" className={styles.button}>
+            <Link href="/repos" passHref>
+              Repos
+            </Link>
+          </button>
+        </div>
       </main>
 
       <footer className={styles.footer}>
