@@ -7,10 +7,8 @@ App for Github Search
 * yarn/npm
 * golang
 
-## API Setup
+## Setup
 
-Follow the `README` from within the `api` directory.
+1. Follow the `README` from within the `api` directory.
 
-## UI Setup
-
-Follow the `README` from within the `ui` directory.
+2. Follow the `README` from within the `ui` directory.
