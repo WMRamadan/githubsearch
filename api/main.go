@@ -29,6 +29,7 @@ func main() {
 		AllowMethods:  "GET",
 		ExposeHeaders: "Content-Type,Authorization,Accept",
 		AllowOrigins:  "http://localhost:3000",
+		AllowHeaders:  "Origin, Content-Type, Accept",
 	}))
 
 	app.Get("/", func(c *fiber.Ctx) error {
