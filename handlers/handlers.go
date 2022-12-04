@@ -53,7 +53,7 @@ func GetRepos(user string, language string, bearer string) []byte {
 }
 
 func GetCommits(user string, date string, bearer string) []byte {
-	URL := "https://api.github.com/search/commits?q=committer:" + user + "+committer-date:>" + date
+	URL := "https://api.github.com/search/commits?q=author:" + user + "+committer:" + user + "+author-date:>" + date + "+committer-date:>" + date
 
 	req, req_err := http.NewRequest("GET", URL, nil)
 
