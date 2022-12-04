@@ -2,19 +2,44 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import Link from 'next/link';
-import useSWR from 'swr';
-import { ListGroupItem, ListGroup } from "reactstrap";
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-const fetcher = (url: RequestInfo | URL) => fetch(url).then((res) => res.json());
+import { useState } from 'react';
 
 export default function Users() {
-  const { data, error } = useSWR('/api/api', fetcher);
-  //Handle the error state
-  if (error) return <div>Failed to load from api.</div>;
-  //Handle the loading state
-  if (!data) return <div>Loading...</div>;
+  const [total_count, setCount] = useState()
+    const [user_items, setItems] = useState()
+    const  handleSubmit = async (event: {
+        target: any; preventDefault: () => void; 
+        }) => {
+            event.preventDefault()
+
+            const data = {
+                location: event.target.location.value,
+            }
+
+            const JSONdata = JSON.stringify(data)
+
+            const endpoint = '/api/users_api'
+
+            const options = {
+
+                method: 'POST',
+
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+
+                body: JSONdata,
+              }
+
+              const response = await fetch(endpoint, options)
+
+              const result = await response.json()
+            
+              setCount(result.total_count)
+              setItems(result.items)
+        }
   return (
     <div className={styles.container}>
       <Head>
@@ -36,9 +61,12 @@ export default function Users() {
             Home
           </Link>
         </button>
-        <ListGroup>
-          <ListGroupItem>Total Users: {data.total_count}</ListGroupItem>
-        </ListGroup>
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="location">Location: </label>
+            <input type="text" id="location" name="location" required/>
+            <button type="submit">Search</button>
+        </form>
+        <p>Result: {total_count}</p>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -56,7 +84,7 @@ export default function Users() {
               </th>
             </tr>
           </thead>
-          {data.items.map((item: { id: number, node_id: string, login: string, html_url: string; }) => (
+          {user_items && user_items?.map((item: { id: number, node_id: string, login: string, html_url: string; }) => (
             <><tr>
               <td>
                 {item.id}

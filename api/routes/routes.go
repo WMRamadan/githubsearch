@@ -16,12 +16,7 @@ func Routes_V1(api fiber.Router) {
 
 	v1 := api.Group("/v1")
 
-	v1.Get("/users/:page?", func(c *fiber.Ctx) error {
-		c.Set("Content-type", "application/json; charset=utf-8")
-		return c.Send(handlers.GetUsers("", c.Params("page"), bearer))
-	})
-
-	v1.Get("/users/location::location?/page::page?", func(c *fiber.Ctx) error {
+	v1.Get("/users/location::location/:page?", func(c *fiber.Ctx) error {
 		c.Set("Content-type", "application/json; charset=utf-8")
 		return c.Send(handlers.GetUsers(c.Params("location"), c.Params("page"), bearer))
 	})
