@@ -48,6 +48,7 @@ func main() {
 		AllowMethods:  "GET",
 		ExposeHeaders: "Content-Type,Authorization,Accept",
 	}))
+
 	bearer = "Bearer " + getEnv("ACCESS_TOKEN", "")
 
 	api := app.Group("/api")
@@ -76,6 +77,10 @@ func main() {
 	v1.Get("/commits/:user/:date", func(c *fiber.Ctx) error {
 		c.Set("Content-type", "application/json; charset=utf-8")
 		return c.Send(handlers.GetCommits(c.Params("user"), c.Params("date"), bearer))
+	})
+
+	app.Use(func(c *fiber.Ctx) error {
+		return c.Status(fiber.StatusNotFound).SendString("What are you doing, you can't be here!")
 	})
 
 	app.Listen(":3000")
