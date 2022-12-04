@@ -26,11 +26,6 @@ go run main.go -prod
 
 ## API
 
-get all users
-```
-curl -X GET http://localhost:3001/api/v1/users/<page_number>
-```
-
 get all users by location
 ```
 curl -X GET http://localhost:3001/api/v1/users/location:<location>/<page_number>
