@@ -27,7 +27,7 @@ func getEnv(key, fallback string) string {
 }
 
 func getVersion() string {
-	file, err := os.Open("VERSION")
+	file, err := os.Open("../VERSION")
 	if err != nil {
 		log.Fatal(err)
 	}

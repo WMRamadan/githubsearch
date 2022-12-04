@@ -1,54 +1,16 @@
 # githubsearch
 
-API for Github Search
+App for Github Search
 
-# Config/Setup
+# Requirements
 
-Export the `ACCESS_TOKEN` environment variable with your github access token
-```
-export ACCESS_TOKEN=<github_acess_token>
-```
+* yarn/npm
+* golang
 
-# Run Tests
-```
-go test -v ./...
-```
+# API Setup
 
-# Run App
+Follow the `README` from within the `api` directory.
 
-Run in developer mode
-```
-go run main.go
-```
+# UI Setup
 
-Run in production mode
-```
-go run main.go -prod
-```
-
-# API
-
-get all users
-```
-curl -X GET http://localhost:3000/api/v1/users/
-```
-
-get all users by location
-```
-curl -X GET http://localhost:3000/api/v1/users/location:<location>
-```
-
-get repositories by user
-```
-curl -X GET http://localhost:3000/api/v1/repos/<username>
-```
-
-get repositories by user & language
-```
-curl -X GET http://localhost:3000/api/v1/repos/<username>/<language>
-```
-
-get commits made by user after specific date <YYYY-MM-DD>
-```
-curl -X GET http://localhost:3000/api/v1/commits/<username>/<date>
-```
+Follow the `README` from within the `ui` directory.
