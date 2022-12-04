@@ -6,8 +6,8 @@ import (
 	"net/http"
 )
 
-func GetUsers(location string, bearer string) []byte {
-	URL := "https://api.github.com/search/users?q=location:" + location
+func GetUsers(location string, page string, bearer string) []byte {
+	URL := "https://api.github.com/search/users?q=location:" + location + "&page=" + page
 
 	req, req_err := http.NewRequest("GET", URL, nil)
 

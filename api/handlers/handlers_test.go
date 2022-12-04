@@ -8,6 +8,7 @@ import (
 func TestGetUsers(t *testing.T) {
 	type args struct {
 		location string
+		page     string
 		bearer   string
 	}
 	tests := []struct {
@@ -19,7 +20,7 @@ func TestGetUsers(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := GetUsers(tt.args.location, tt.args.bearer); !reflect.DeepEqual(got, tt.want) {
+			if got := GetUsers(tt.args.location, tt.args.page, tt.args.bearer); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("GetUsers() = %v, want %v", got, tt.want)
 			}
 		})

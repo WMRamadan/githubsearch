@@ -59,14 +59,14 @@ func main() {
 		return c.SendString("Welcome to Github Search v" + getVersion())
 	})
 
-	v1.Get("/users", func(c *fiber.Ctx) error {
+	v1.Get("/users/:page?", func(c *fiber.Ctx) error {
 		c.Set("Content-type", "application/json; charset=utf-8")
-		return c.Send(handlers.GetUsers("", bearer))
+		return c.Send(handlers.GetUsers("", c.Params("page"), bearer))
 	})
 
-	v1.Get("/users/location::location?", func(c *fiber.Ctx) error {
+	v1.Get("/users/location::location?/page::page?", func(c *fiber.Ctx) error {
 		c.Set("Content-type", "application/json; charset=utf-8")
-		return c.Send(handlers.GetUsers(c.Params("location"), bearer))
+		return c.Send(handlers.GetUsers(c.Params("location"), c.Params("page"), bearer))
 	})
 
 	v1.Get("/repos/:user/:language?", func(c *fiber.Ctx) error {
