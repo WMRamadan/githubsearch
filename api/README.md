@@ -1,5 +1,3 @@
-# GitHub Search api
-
 API for Github Search
 
 # Config/Setup
