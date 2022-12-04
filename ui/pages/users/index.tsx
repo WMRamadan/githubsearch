@@ -21,11 +21,11 @@ export default function Users() {
         <p className={styles.description}>
           This is the Users section!
         </p>
-        <ul>
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-        </ul>
+        <button type="button" className={styles.button}>
+          <Link href="/" passHref>
+            Home
+          </Link>
+        </button>
       </main>
 
       <footer className={styles.footer}>

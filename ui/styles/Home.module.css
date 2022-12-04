@@ -108,6 +108,17 @@
   margin-left: 0.5rem;
 }
 
+.button {
+  background-color: #555555; /* Black */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
