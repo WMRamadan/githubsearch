@@ -1,17 +1,10 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import useSWR from 'swr';
+import styles from '../../styles/Home.module.css'
 import Link from 'next/link';
 
-const fetcher = (url: RequestInfo | URL) => fetch(url).then((res) => res.json());
 
-export default function Home() {
-  const { data, error } = useSWR('/api/staticdata', fetcher);
-  //Handle the error state
-  if (error) return <div>Failed to load file.</div>;
-  //Handle the loading state
-  if (!data) return <div>Loading...</div>;
+export default function Users() {
   return (
     <div className={styles.container}>
       <Head>
@@ -22,15 +15,15 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to GitHub Search!
+          Welcome to Users Search!
         </h1>
 
         <p className={styles.description}>
-          API v{data}
+          This is the Users section!
         </p>
         <ul>
           <li>
-            <Link href="/users">Users</Link>
+            <Link href="/">Home</Link>
           </li>
         </ul>
       </main>
