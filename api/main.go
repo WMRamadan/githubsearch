@@ -15,7 +15,7 @@ import (
 
 var (
 	bearer string
-	port   = flag.String("port", ":3000", "Port to listen on")
+	port   = flag.String("port", ":3001", "Port to listen on")
 	prod   = flag.Bool("prod", false, "Enable prefork in Production")
 )
 
@@ -83,5 +83,5 @@ func main() {
 		return c.Status(fiber.StatusNotFound).SendString("What are you doing, you can't be here!")
 	})
 
-	app.Listen(":3000")
+	app.Listen(":3001")
 }

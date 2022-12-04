@@ -30,25 +30,25 @@ go run main.go -prod
 
 get all users
 ```
-curl -X GET http://localhost:3000/api/v1/users/
+curl -X GET http://localhost:3001/api/v1/users/
 ```
 
 get all users by location
 ```
-curl -X GET http://localhost:3000/api/v1/users/location:<location>
+curl -X GET http://localhost:3001/api/v1/users/location:<location>
 ```
 
 get repositories by user
 ```
-curl -X GET http://localhost:3000/api/v1/repos/<username>
+curl -X GET http://localhost:3001/api/v1/repos/<username>
 ```
 
 get repositories by user & language
 ```
-curl -X GET http://localhost:3000/api/v1/repos/<username>/<language>
+curl -X GET http://localhost:3001/api/v1/repos/<username>/<language>
 ```
 
 get commits made by user after specific date <YYYY-MM-DD>
 ```
-curl -X GET http://localhost:3000/api/v1/commits/<username>/<date>
+curl -X GET http://localhost:3001/api/v1/commits/<username>/<date>
 ```
