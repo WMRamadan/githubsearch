@@ -2,10 +2,8 @@ package main
 
 import (
 	"flag"
-	"githubsearch/handlers"
-	"io/ioutil"
-	"log"
-	"os"
+	"githubsearch/helpers"
+	"githubsearch/routes"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -19,28 +17,11 @@ var (
 	prod   = flag.Bool("prod", false, "Enable prefork in Production")
 )
 
-func getEnv(key, fallback string) string {
-	if value, ok := os.LookupEnv(key); ok {
-		return value
-	}
-	return fallback
-}
-
-func getVersion() string {
-	file, err := os.Open("../VERSION")
-	if err != nil {
-		log.Fatal(err)
-	}
-	b, err := ioutil.ReadAll(file)
-	file.Close()
-	return string(b)
-}
-
 func main() {
 	flag.Parse()
 	app := fiber.New(fiber.Config{
 		Prefork: *prod, // go run app.go -prod
-		AppName: "Github Search v" + getVersion(),
+		AppName: "Github Search v" + helpers.GetVersion(),
 	})
 	app.Use(recover.New())
 	app.Use(logger.New())
@@ -49,35 +30,13 @@ func main() {
 		ExposeHeaders: "Content-Type,Authorization,Accept",
 	}))
 
-	bearer = "Bearer " + getEnv("ACCESS_TOKEN", "")
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Welcome to Github Search v" + helpers.GetVersion())
+	})
 
 	api := app.Group("/api")
 
-	v1 := api.Group("/v1")
-
-	v1.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Welcome to Github Search v" + getVersion())
-	})
-
-	v1.Get("/users/:page?", func(c *fiber.Ctx) error {
-		c.Set("Content-type", "application/json; charset=utf-8")
-		return c.Send(handlers.GetUsers("", c.Params("page"), bearer))
-	})
-
-	v1.Get("/users/location::location?/page::page?", func(c *fiber.Ctx) error {
-		c.Set("Content-type", "application/json; charset=utf-8")
-		return c.Send(handlers.GetUsers(c.Params("location"), c.Params("page"), bearer))
-	})
-
-	v1.Get("/repos/:user/:language?", func(c *fiber.Ctx) error {
-		c.Set("Content-type", "application/json; charset=utf-8")
-		return c.Send(handlers.GetRepos(c.Params("user"), c.Params("language"), bearer))
-	})
-
-	v1.Get("/commits/:user/:date", func(c *fiber.Ctx) error {
-		c.Set("Content-type", "application/json; charset=utf-8")
-		return c.Send(handlers.GetCommits(c.Params("user"), c.Params("date"), bearer))
-	})
+	routes.Routes_V1(api)
 
 	app.Use(func(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusNotFound).SendString("What are you doing, you can't be here!")
