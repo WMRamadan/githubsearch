@@ -1,4 +1,4 @@
-# githubsearch api
+# GitHub Search api
 
 API for Github Search
 
