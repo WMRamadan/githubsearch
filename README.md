@@ -1,4 +1,4 @@
-# githubsearch
+# GitHub Search
 
 App for Github Search
 
