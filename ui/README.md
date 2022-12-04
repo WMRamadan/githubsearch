@@ -10,7 +10,7 @@ This is the UI for Github Search App.
     yarn install
     ```
 
-2. First, run the development server:
+2. Run the development server:
 
     ```bash
     npm run dev
