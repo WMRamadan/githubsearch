@@ -49,7 +49,7 @@ export default function Users() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
+        <h1 id="title" className={styles.title}>
           Welcome to Users Search!
         </h1>
 
