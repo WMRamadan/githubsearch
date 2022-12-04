@@ -28,6 +28,7 @@ func main() {
 	app.Use(cors.New(cors.Config{
 		AllowMethods:  "GET",
 		ExposeHeaders: "Content-Type,Authorization,Accept",
+		AllowOrigins:  "http://localhost:3000",
 	}))
 
 	app.Get("/", func(c *fiber.Ctx) error {
