@@ -2,15 +2,15 @@
 
 App for Github Search
 
-# Requirements
+## Requirements
 
 * yarn/npm
 * golang
 
-# API Setup
+## API Setup
 
 Follow the `README` from within the `api` directory.
 
-# UI Setup
+## UI Setup
 
 Follow the `README` from within the `ui` directory.
